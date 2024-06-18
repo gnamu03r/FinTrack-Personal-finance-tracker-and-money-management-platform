@@ -10,7 +10,7 @@
     { "handle": "filesystem" },
     {
       "src": "/api/(.*)",
-      "dest": "http://https://finbackend.vercel.app/api/$1" 
+      "dest": "http://finbackend.vercel.app/api/$1"
     },
     {
       "src": "/(.*)",
