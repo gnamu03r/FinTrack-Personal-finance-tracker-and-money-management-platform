@@ -14,7 +14,8 @@ app.use(express.json());
 app.use(cors());
 
 //routes
-readdirSync('./routes').map((route) => app.use('/api/v1', require('./routes/' + route)));
+const routesPath = path.join(__dirname, 'routes');
+readdirSync(routesPath).map((route) => app.use('/api/v1', require(path.join(routesPath, route))));
 
 // Serve a static HTML page
 app.get('/', (req, res) => {
