@@ -1,5 +1,7 @@
 {
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/" }
-    ]
-  }
+  "version": 2,
+  "routes": [
+    { "src": "/api/(.*)", "dest": "http://finbackend.vercel.app/api/$1" },
+    { "src": "/(.*)", "dest": "/build/$1" }
+  ]
+}
