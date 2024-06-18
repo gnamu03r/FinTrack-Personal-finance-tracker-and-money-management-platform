@@ -1,25 +1,27 @@
 const express = require('express');
-const path = require('path');
+const cors = require('cors');
 const { db } = require('./db/db');
+const { readdirSync } = require('fs');
+const path = require('path');
 const app = express();
 
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+//middlewares
 app.use(express.json());
+app.use(cors());
 
-// Serve the index.html directly from the backend directory
+//routes
+readdirSync('./routes').map((route) => app.use('/api/v1', require('./routes/' + route)));
+
+// Serve a static HTML page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Routes
-const routesPath = path.join(__dirname, 'routes');
-app.use('/api/v1', require(path.join(routesPath, 'transactions')));
-
-// Database connection (ensure this is correctly configured)
+// Database connection
 db();
 
 // Export the app for Vercel's serverless function
