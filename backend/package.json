@@ -1,10 +1,11 @@
 {
-  "name": "backend",
+ "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo \"No build step necessary\""
   },
   "author": "",
   "license": "ISC",
