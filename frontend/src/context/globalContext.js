@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react"
 import axios from 'axios'
 
 
-const BASE_URL = "http://localhost:5000/api/v1/" || process.env.REACT_APP_API_URL;
+const BASE_URL = "http://localhost:5000/api/v1/";
 
 
 const GlobalContext = React.createContext()
