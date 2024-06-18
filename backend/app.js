@@ -9,17 +9,26 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
 
-//middlewares
+// Middleware
 app.use(express.json());
 app.use(cors());
 
-//routes
+// Routes
 const routesPath = path.join(__dirname, 'routes');
-readdirSync(routesPath).map((route) => app.use('/api/v1', require(path.join(routesPath, route))));
+readdirSync(routesPath).forEach((file) => {
+  const routeFilePath = path.join(routesPath, file);
+  if (file.endsWith('.js')) {
+    const route = require(routeFilePath);
+    app.use('/api/v1', route);
+  }
+});
 
-// Serve a static HTML page
+// Serve static files (if needed)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve a static HTML page (optional)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Database connection
